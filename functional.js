@@ -37,7 +37,7 @@ function fetchFields(...fields){
 }
 
 function main() {
-    let myFields = fetchFields(FIELDS)
+    let myFields = fetchFields(...FIELDS)
 
     myFields.submit.addEventListener("click", function(event) {
         event.preventDefault()
