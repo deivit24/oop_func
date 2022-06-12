@@ -1,4 +1,6 @@
 
+const FIELDS = ["submit", "clear", "username", "password"]
+
 function createUser(username, password) {
     if (validateUser(username, password)) {
         console.log({"username": username, "password": password})
@@ -26,23 +28,25 @@ function validateUser(username, password) {
     return false
 }
 
+function fetchFields(...fields){
+    let fieldsObj = {}
+    for (let field of fields) {
+        fieldsObj[field] = document.getElementById(field)
+    }
+    return fieldsObj
+}
+
 function main() {
-    let submitBtn = document.getElementById("submit");
-    let clearBtn = document.getElementById("clear");
+    let myFields = fetchFields(FIELDS)
 
-    let usernameInput = document.getElementById("username")
-    let passwordInput = document.getElementById("password")
-
-    
-
-    submitBtn.addEventListener("click", function(event) {
+    myFields.submit.addEventListener("click", function(event) {
         event.preventDefault()
-        createUser(usernameInput.value, passwordInput.value)
-        clearForm(usernameInput, passwordInput)
+        createUser(myFields.username.value, myFields.password.value)
+        clearForm(myFields.username, myFields.password)
     })
-    clearBtn.addEventListener("click", function(event){
+    myFields.clear.addEventListener("click", function(event){
         event.preventDefault()
-        clearForm(usernameInput, passwordInput)
+        clearForm(myFields.username, myFields.password)
     })
 }
 
